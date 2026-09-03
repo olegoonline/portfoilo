@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>B2C/B2B Platform — Oleg Salnikov</title>
+<!-- Favicon -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=20260903">
 </head>
 <body>
+
+<div class="case-glow case-glow--neutral" aria-hidden="true"></div>
 
 <div class="container">
   <header class="site-header">
@@ -20,10 +26,24 @@
   </header>
 </div>
 
-<main class="case-wrap case-main">
+<main class="case-wrap case-main has-toc">
+  <nav class="case-toc" aria-label="Contents">
+    <div class="case-toc-inner">
+      <ul class="case-toc-list">
+        <li><a href="#overview">overview</a></li>
+        <li><a href="#vision">it started with vision</a></li>
+        <li><a href="#design-system">design system</a></li>
+        <li><a href="#research">research</a></li>
+        <li><a href="#b2b-panel">b2b panel</a></li>
+        <li><a href="#ai-integration">ai integration</a></li>
+        <li><a href="#design-nda">design and nda</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <a class="back-pill" href="../index.html"><span class="material-symbols-outlined">arrow_back</span>Back</a>
 
-  <section class="case-intro">
+  <section class="case-intro" id="overview">
     <h1 class="case-title">b2c/b2b platform</h1>
     <div class="case-desc">
       <p>A mobile-first platform running 13 active brands on a shared design system. Each brand needed its own identity while sharing the same component base.</p>
@@ -34,27 +54,27 @@
   </section>
 
   <section class="case-notes">
-    <div class="note">
+    <div class="note" id="vision">
       <span class="note-num">01</span>
       <h3 class="note-title">it started with vision</h3>
       <p class="note-body">I designed in close collaboration with the CEO, and together we shaped a shared vision for the UI and UX. The result was a clean design with clear visual and interaction patterns, and one that's easy to scale.</p>
     </div>
-    <div class="note">
+    <div class="note" id="design-system">
       <span class="note-num">02</span>
       <h3 class="note-title">design system architecture</h3>
       <p class="note-body">Built a large enterprise design system that keeps things consistent across dozens of projects and lets us spin up new ones in record time.</p>
     </div>
-    <div class="note">
+    <div class="note" id="research">
       <span class="note-num">03</span>
       <h3 class="note-title">research</h3>
       <p class="note-body">The whole design team and I use Microsoft Clarity to gather real insights into user behavior. It lets us adjust the UX quickly and see how well our mechanics are performing.</p>
     </div>
-    <div class="note">
+    <div class="note" id="b2b-panel">
       <span class="note-num">04</span>
       <h3 class="note-title">b2b panel</h3>
       <p class="note-body">A large B2B panel serving 150+ internal users and external teams. I owned the UX and later led the UX team that maintains the panel today. Most screens are now designed or prototyped to ~90% completion with the help of AI.</p>
     </div>
-    <div class="note">
+    <div class="note" id="ai-integration">
       <span class="note-num">05</span>
       <h3 class="note-title">ai integration</h3>
       <p class="note-body">Beyond off-the-shelf tools like Claude design, we used custom plugins and programs built with Claude code to push our prototyping further.</p>
@@ -67,7 +87,7 @@
   </section>
 
   <section class="case-gallery">
-    <div class="note">
+    <div class="note" id="design-nda">
       <span class="note-num">06</span>
       <h3 class="note-title">design and nda</h3>
       <p class="note-body">I can only show fully reworked screens and shots where the details aren't clearly visible. On the checkout screen, some of the original logic got lost, since I had to remove a few mechanics. The whole app has 500+ screens, its hard to count at this moment.</p>
@@ -113,6 +133,7 @@
 </footer>
 
 <script src="lightbox.js" defer></script>
+<script src="toc.js" defer></script>
 
 </body>
 </html>

@@ -13,6 +13,47 @@
   --icon-stroke: rgba(255, 255, 255, 0.1);
   --hairline: rgba(255, 255, 255, 0.08);
   --font: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  /* corner scale — medium, Apple-like; continuous corners applied below */
+  --radius-sm: 10px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 28px;
+  --radius-2xl: 40px;
+  /* body-copy scale — one step per role, so a "caption" on the home page
+     and a "caption" on a case page are literally the same size.
+     --fs-body : project descriptions, case intros, note bodies
+     --fs-meta : small service text (role line, note numbers, about points) */
+  --fs-body: 19px;
+  --fs-meta: 16px;
+  --lh-body: 1.45;
+}
+
+/* body copy steps down with the viewport; the meta tier stays put, so the
+   gap between the two never collapses on small screens */
+@media (max-width: 1040px) {
+  :root { --fs-body: 18px; }
+}
+
+@media (max-width: 720px) {
+  :root { --fs-body: 17px; }
+}
+
+/* Apple's corners are continuous, not circular — use the superellipse
+   wherever the browser supports it, plain rounding everywhere else. */
+@supports (corner-shape: squircle) {
+  .project-image,
+  .case-hero,
+  .case-shot,
+  .case-box,
+  .case-tile,
+  .case-gallery > img,
+  .case-media img,
+  .case-figure img,
+  .case-pair img,
+  .case-quad img,
+  .case-tiles img,
+  .skill,
+  .lightbox-img { corner-shape: squircle; }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,6 +61,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+  position: relative;
   background: var(--bg);
   color: var(--text-primary);
   font-family: var(--font);
@@ -78,7 +120,9 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.2s ease;
 }
 
-.site-nav a:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .site-nav a:hover { color: var(--accent); }
+}
 
 /* ── Links with external icon ───────────────────────────────────── */
 
@@ -98,8 +142,10 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.2s ease;
 }
 
-.ext-link:hover,
-.ext-link:hover .material-symbols-outlined { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .ext-link:hover,
+  .ext-link:hover .material-symbols-outlined { color: var(--accent); }
+}
 
 /* ── Hero ───────────────────────────────────────────────────────── */
 
@@ -141,7 +187,7 @@ h1.display, .display {
 .hero-bio {
   font-size: 21px;
   font-weight: 300;
-  line-height: 25px;
+  line-height: 1.2;
   color: var(--text-secondary);
   text-align: right;
 }
@@ -149,12 +195,18 @@ h1.display, .display {
 .social-row {
   display: flex;
   justify-content: flex-end;
-  gap: 24px;
+  gap: 32px;
   align-items: center;
 }
 
 /* hero link text reads in accent green; icons stay fff 0.1 (footer socials stay white) */
-.social-row .ext-link { color: var(--accent); }
+.social-row .ext-link {
+  color: var(--accent);
+  font-size: var(--fs-body);
+  gap: 10px;
+}
+
+.social-row .ext-link .material-symbols-outlined { font-size: 20px; }
 
 /* ── Project list ───────────────────────────────────────────────── */
 
@@ -186,11 +238,12 @@ h1.display, .display {
 }
 
 .project-desc {
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 300;
-  line-height: 1.25;
+  line-height: var(--lh-body);
   color: var(--text-secondary);
   max-width: 325px;
+  text-wrap: pretty;
 }
 
 .project-image {
@@ -199,6 +252,7 @@ h1.display, .display {
   display: block;
   aspect-ratio: 900 / 560;
   overflow: hidden;
+  border-radius: var(--radius-2xl);
   background: var(--card);
 }
 
@@ -209,10 +263,7 @@ h1.display, .display {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-
-.project-image:hover img { transform: scale(1.03); }
 
 .project-image .card-label {
   position: absolute;
@@ -236,7 +287,14 @@ h1.display, .display {
 
 .project-image .card-label .material-symbols-outlined { font-size: 16px; color: var(--accent); }
 
-.project-image:hover .card-label { opacity: 1; transform: translateY(0); }
+/* no pointer to hover with: the label is simply part of the card */
+@media (hover: none) {
+  .project-image .card-label { opacity: 1; transform: none; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-image:hover .card-label { opacity: 1; transform: translateY(0); }
+}
 
 /* ── About ──────────────────────────────────────────────────────── */
 
@@ -277,9 +335,9 @@ h1.display, .display {
 }
 
 .about-point p {
-  font-size: 16px;
+  font-size: var(--fs-meta);
   font-weight: 300;
-  line-height: 19px;
+  line-height: 1.2;
   color: var(--text-secondary);
 }
 
@@ -292,23 +350,33 @@ h1.display, .display {
 
 /* ── Case page ──────────────────────────────────────────────────── */
 
+/* floats over the case, pinned to the left edge of the 900px column */
 .back-pill {
+  position: fixed;
+  top: 88px;
+  left: max(40px, calc(50% - 450px));
+  z-index: 30;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px 8px 12px;
+  gap: 10px;
+  padding: 12px 26px 12px 18px;
   border-radius: 999px;
-  background: var(--surface);
-  font-size: 14px;
+  background: rgba(22, 24, 28, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 16px;
   font-weight: 500;
   color: var(--accent);
   margin-top: 0;
   transition: background 0.2s ease;
 }
 
-.back-pill .material-symbols-outlined { font-size: 20px; color: var(--accent); }
+.back-pill .material-symbols-outlined { font-size: 24px; color: var(--accent); }
 
-.back-pill:hover { background: rgb(30, 31, 33); }
+@media (hover: hover) and (pointer: fine) {
+  .back-pill:hover { background: var(--accent); color: var(--bg); }
+  .back-pill:hover .material-symbols-outlined { color: var(--bg); }
+}
 
 /* case content lives in a 900px column centred under the full-width header */
 .case-wrap {
@@ -323,7 +391,8 @@ h1.display, .display {
   flex-direction: column;
   align-items: flex-start;
   gap: 96px;
-  padding: 64px 0 96px;
+  /* top padding carries the space the back pill used to occupy in flow */
+  padding: 140px 0 96px;
 }
 
 .case-main > * { width: 100%; }
@@ -352,18 +421,20 @@ h1.display, .display {
 }
 
 .case-desc p {
-  font-size: 18px;
+  font-size: var(--fs-body);
   font-weight: 300;
-  line-height: 1.45;
+  line-height: var(--lh-body);
   color: var(--text-body);
   text-wrap: pretty;
 }
 
 .case-role {
   margin-top: 24px;
-  font-size: 16px;
+  font-size: var(--fs-meta);
   font-weight: 300;
+  line-height: var(--lh-body);
   color: var(--text-faint);
+  text-wrap: pretty;
 }
 
 .case-hero {
@@ -372,6 +443,7 @@ h1.display, .display {
   aspect-ratio: 900 / 560;
   background: var(--card);
   overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 
 .case-hero img {
@@ -404,8 +476,9 @@ h1.display, .display {
 }
 
 .note-num {
-  font-size: 16px;
+  font-size: var(--fs-meta);
   font-weight: 500;
+  line-height: 1.2;
   color: var(--text-faint);
 }
 
@@ -420,9 +493,9 @@ h1.display, .display {
 
 .note-body {
   margin-top: 16px;
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 300;
-  line-height: 1.45;
+  line-height: var(--lh-body);
   color: var(--text-body);
   white-space: pre-line;
   text-wrap: pretty;
@@ -444,7 +517,7 @@ h1.display, .display {
   align-items: flex-start;
 }
 
-.case-gallery > img { width: 100%; height: auto; display: block; }
+.case-gallery > img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
 .case-gallery .note { max-width: none; }
 
@@ -453,6 +526,7 @@ h1.display, .display {
   aspect-ratio: 900 / 440;
   background: var(--card);
   overflow: hidden;
+  border-radius: var(--radius);
 }
 
 .case-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -472,6 +546,7 @@ h1.display, .display {
   width: 100%;
   aspect-ratio: 440 / 320;
   background: var(--card);
+  border-radius: var(--radius);
 }
 
 /* stacked full-width media */
@@ -481,7 +556,7 @@ h1.display, .display {
   gap: 24px;
 }
 
-.case-media img { width: 100%; height: auto; display: block; }
+.case-media img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
 /* lead note then a full-width image below it (oasis) */
 .case-figure {
@@ -492,7 +567,7 @@ h1.display, .display {
 }
 
 .case-figure .note { max-width: 40.3%; }
-.case-figure img { width: 100%; height: auto; display: block; }
+.case-figure img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
 /* two tall screenshots side by side (modern strike) */
 .case-pair {
@@ -502,7 +577,7 @@ h1.display, .display {
   align-items: start;
 }
 
-.case-pair img { width: 100%; height: auto; display: block; }
+.case-pair img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
 /* row of four tall phone shots (b2b) */
 .case-quad {
@@ -513,7 +588,7 @@ h1.display, .display {
 }
 
 .case-quad .case-shot { aspect-ratio: 207 / 448; }
-.case-quad img { width: 100%; height: auto; display: block; }
+.case-quad img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
 /* 2×2 grid of tall image tiles (dream islands) */
 .case-tiles {
@@ -527,9 +602,10 @@ h1.display, .display {
   width: 100%;
   aspect-ratio: 438 / 952;
   background: var(--card);
+  border-radius: var(--radius);
 }
 
-.case-tiles img { width: 100%; height: auto; display: block; }
+.case-tiles img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
 /* prev / next */
 .case-nav {
@@ -545,14 +621,17 @@ h1.display, .display {
   gap: 16px;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.2;
+  color: var(--text-primary);
   transition: color 0.2s ease;
 }
 
-.case-nav a .material-symbols-outlined { color: rgba(255, 255, 255, 0.8); transition: color 0.2s ease; }
+.case-nav a .material-symbols-outlined { color: var(--text-primary); transition: color 0.2s ease; }
 
-.case-nav a:hover,
-.case-nav a:hover .material-symbols-outlined { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .case-nav a:hover,
+  .case-nav a:hover .material-symbols-outlined { color: var(--accent); }
+}
 
 /* ── Footer ─────────────────────────────────────────────────────── */
 
@@ -622,6 +701,63 @@ h1.display, .display {
   color: var(--text-primary);
 }
 
+/* ── Case glow — ambient light behind the intro, tinted per case ─── */
+
+.case-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 860px;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+}
+
+/* dream islands — wellness green */
+.case-glow--green {
+  background-image:
+    radial-gradient(ellipse 112% 94% at 50% -10%, rgba(48, 209, 88, 0.20), transparent 82%),
+    radial-gradient(ellipse 58% 52% at 50% -8%, rgba(140, 245, 175, 0.10), transparent 84%);
+}
+
+/* petal search / huawei — brand cyan */
+.case-glow--cyan {
+  background-image:
+    radial-gradient(ellipse 112% 94% at 50% -10%, rgba(20, 197, 224, 0.24), transparent 82%),
+    radial-gradient(ellipse 58% 52% at 50% -8%, rgba(90, 220, 255, 0.10), transparent 84%);
+}
+
+/* b2c/b2b platform — 13 brands, no single colour: neutral light */
+.case-glow--neutral {
+  background-image:
+    radial-gradient(ellipse 112% 94% at 50% -10%, rgba(255, 255, 255, 0.15), transparent 82%),
+    radial-gradient(ellipse 58% 52% at 50% -8%, rgba(255, 255, 255, 0.07), transparent 84%);
+}
+
+/* modern strike online — crimson */
+.case-glow--red {
+  background-image:
+    radial-gradient(ellipse 112% 94% at 50% -10%, rgba(255, 62, 80, 0.22), transparent 82%),
+    radial-gradient(ellipse 58% 52% at 50% -8%, rgba(255, 120, 110, 0.09), transparent 84%);
+}
+
+/* oasis studio — moody teal */
+.case-glow--teal {
+  background-image:
+    radial-gradient(ellipse 112% 94% at 50% -10%, rgba(99, 230, 226, 0.20), transparent 82%),
+    radial-gradient(ellipse 58% 52% at 50% -8%, rgba(150, 240, 236, 0.08), transparent 84%);
+}
+
+@media (max-width: 1040px) {
+  .case-glow { height: 680px; }
+}
+
+@media (max-width: 720px) {
+  .case-glow { height: 480px; }
+}
+
 /* ── Responsive ─────────────────────────────────────────────────── */
 
 @media (max-width: 1040px) {
@@ -648,7 +784,9 @@ h1.display, .display {
   .project-text { grid-column: 1 / -1; }
   .project-image { grid-column: 1 / -1; }
   .about::before { margin-bottom: 104px; }
-  .case-main { gap: 64px; padding-top: 48px; }
+  /* leaves room for the fixed back pill */
+  .case-main { gap: 64px; padding-top: 116px; }
+  .back-pill { top: 76px; left: 24px; }
   .case-title { font-size: 40px; }
   .case-notes, .case-split, .case-pair, .case-quad, .case-tiles { grid-template-columns: 1fr; row-gap: 56px; }
   .note-title { font-size: 28px; }
@@ -681,7 +819,7 @@ h1.display, .display {
   max-height: 100%;
   object-fit: contain;
   display: block;
-  border-radius: 4px;
+  border-radius: var(--radius);
   transition: transform 0.15s ease;
   will-change: transform;
 }
@@ -709,7 +847,9 @@ h1.display, .display {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.lightbox-btn:hover { background: rgba(255, 255, 255, 0.16); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-btn:hover { background: rgba(255, 255, 255, 0.16); color: var(--accent); }
+}
 
 .lightbox-btn .material-symbols-outlined { font-size: 28px; }
 
@@ -725,4 +865,443 @@ h1.display, .display {
   .case-quad img,
   .case-figure img,
   .case-media img { cursor: zoom-in; }
+}
+
+/* ── Skills ─────────────────────────────────────────────────────── */
+
+.skills { padding-bottom: 128px; }
+
+/* divider above the section — 128px clear on each side */
+.skills::before {
+  content: "";
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--hairline);
+  margin-bottom: 128px;
+}
+
+.skills > h2 { grid-column: 1 / span 4; }
+
+/* the mask edges are animated, so they have to be typed lengths */
+@property --fade-l { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --fade-r { syntax: "<length>"; inherits: false; initial-value: 0px; }
+
+/* horizontal scroller — the track is wider than the column it starts in
+   and bleeds past the page margin, so cards enter and leave the frame
+   through a soft mask instead of a hard cut. */
+.skills-right {
+  grid-column: 5 / -1;
+  display: flex;
+  gap: 16px;
+  /* the fade runs long, so cards dissolve into the page rather than
+     stopping at an edge; the left inset matches it, so the first card
+     still reads crisp at rest */
+  --fade: 160px;
+  /* where the first card rests — independent of --fade, so the cards can
+     start further right without moving the point the fade begins at */
+  --track-start: 290px;
+  padding: 16px 40px 0 var(--track-start);
+  margin-left: calc(var(--fade) * -1);
+  margin-right: -40px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: var(--track-start);
+  scrollbar-width: none;
+  -webkit-mask-image: var(--edge-fade);
+  mask-image: var(--edge-fade);
+  /* each edge only fades while there is track left on that side —
+     cards.js flips the two classes below as the track is scrolled */
+  --fade-l: 0px;
+  --fade-r: var(--fade);
+  --edge-fade: linear-gradient(to right,
+    transparent 0,
+    #000 var(--fade-l),
+    #000 calc(100% - var(--fade-r)),
+    transparent 100%);
+  transition: --fade-l 0.25s ease, --fade-r 0.25s ease;
+}
+
+.skills-right::-webkit-scrollbar { display: none; }
+
+.skills-right.is-scrolled { --fade-l: var(--fade); }
+.skills-right.is-at-end { --fade-r: 0px; }
+
+.skill {
+  --tint: 255, 255, 255;
+  flex: 0 0 288px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background: rgba(var(--tint), 0.08);
+  border-radius: var(--radius-xl);
+}
+
+/* muted card tints — one per skill */
+.skill--sage   { --tint: 134, 170, 148; }
+.skill--violet { --tint: 148, 134, 196; }
+.skill--slate  { --tint: 116, 150, 186; }
+.skill--amber  { --tint: 198, 164, 104; }
+.skill--clay   { --tint: 198, 132, 110; }
+.skill--rose   { --tint: 190, 132, 148; }
+
+.skill-icon {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 4px;
+}
+
+.skill-title {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text-primary);
+  text-wrap: pretty;
+}
+
+.skill-desc {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 19px;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+@media (max-width: 1040px) {
+  .skills { row-gap: 64px; }
+  .skills > h2 { grid-column: 1 / -1; }
+  /* heading moves above the track, so the cards start at the page margin */
+  .skills-right { grid-column: 1 / -1; padding-top: 0; --track-start: var(--fade); }
+}
+
+@media (max-width: 720px) {
+  .skills::before { margin-bottom: 104px; }
+  .skills-right {
+    grid-column: 1 / -1;
+    gap: 12px;
+    --fade: 88px;
+    --track-start: var(--fade);
+    padding-right: 24px;
+    margin-right: -24px;
+  }
+  .skill { flex-basis: 268px; }
+}
+
+/* ── Case table of contents ──────────────────────────────────────
+   A sticky text-only index parked in the empty gutter right of the
+   900px case column. The rail is absolutely positioned against
+   .case-main (which only gets `position: relative` through the extra
+   `has-toc` class added in the markup), so it never joins the flex
+   flow and the centred column keeps its exact geometry. Desktop
+   only — hidden entirely below 1360px, where the gutter runs out. */
+
+.case-toc { display: none; }
+
+@media (min-width: 1360px) {
+  .case-main.has-toc { position: relative; }
+
+  /* Rail: the track the list is allowed to travel along. Its bottom
+     inset is what stops the list level with the prev/next nav at the
+     foot of the case, so the index never slides under the arrows or
+     down onto the hairline that closes the page. */
+  .case-main > .case-toc {
+    display: block;
+    position: absolute;
+    top: 96px;
+    /* Sticky clamps the untransformed box, which sits half a list-height
+       below where the list is drawn — so the rail's own end has to be
+       lifted by that same half-height for the list to stop level with
+       the prev/next nav. toc.js measures the list into --toc-h; the
+       fallback covers the six-entry cases until it does. */
+    bottom: calc(100px - var(--toc-h, 232px) / 2);
+    left: calc(100% + 30px);
+    width: 160px;
+    pointer-events: none;
+  }
+
+  /* held at the vertical middle of the viewport while scrolling: sticky
+     pins the box to 50vh, the shift re-centres the list on that line */
+  .case-toc-inner {
+    position: sticky;
+    top: 50vh;
+    transform: translateY(-50%);
+  }
+
+  .case-toc-list {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    pointer-events: auto;
+  }
+
+  .case-toc-list a {
+    display: block;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.3);
+    text-wrap: pretty;
+    transition: color 0.3s ease;
+  }
+
+  .case-toc-list a:hover,
+  .case-toc-list a:focus-visible { color: rgba(255, 255, 255, 0.7); }
+
+  .case-toc-list a.is-current { color: var(--text-primary); }
+
+  /* landing offset for direct #hash links */
+  .case-main [id] { scroll-margin-top: 96px; }
+}
+
+/* Once the page is wide enough for the site's own 1440/40px margins to
+   kick in, a 70px gutter lands the rail exactly on the site's right
+   margin at every width — the index lines up with the nav above it.
+   Below 1440px the margin is pinned at 40px, so the narrower gutter
+   above keeps the rail from running off the right edge. */
+@media (min-width: 1440px) {
+  .case-main > .case-toc { left: calc(100% + 70px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-toc-list a { transition: none; }
+}
+
+/* ── Home glow — ambient drifting light, index.html only ────────── */
+/*
+   Fixed to the viewport: the page is long, so a viewport-sized layer
+   keeps the light present on every screen while animating only two
+   composited layers (an absolute full-height layer would be enormous
+   and would leave most of the page unlit at any given scroll offset).
+   Sits at z-index: -1 — body's background paints on the canvas, so the
+   layer lands above the background and below all content.
+
+   Colour is driven by glow.js, which builds two identical tint layers
+   inside the element and cross-fades their opacity as you scroll past
+   each project row. Opacity is the only thing that changes, so a colour
+   change costs a compositor blend and nothing is re-rasterised — tinting
+   the gradients directly made the whole layer repaint on every frame of
+   the fade, which is what showed up as flicker while scrolling.
+*/
+
+.home-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+  opacity: 0.9;
+  /* strength fade (out under skills/about/footer) is slower than the
+     colour cross-fade, so the ending is unhurried */
+  transition: opacity 3.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+  /* faint neutral base so the tinted orbs have something to sit in */
+  background-image: radial-gradient(ellipse 120% 90% at 50% -18%,
+    rgba(255, 255, 255, 0.042) 0%,
+    rgba(255, 255, 255, 0.028) 32%,
+    rgba(255, 255, 255, 0.013) 60%,
+    rgba(255, 255, 255, 0.004) 82%,
+    rgba(255, 255, 255, 0) 100%);
+}
+
+/* Two of these, built by glow.js. Both carry the same drifting orbs and
+   start their animations together, so they stay in step and the fade
+   between them never shifts position — only hue. */
+.home-glow-tint {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+  /* mix of the five case hues — what the hero shows before the first row */
+  --glow-color: 135 191 175;
+}
+
+.home-glow-tint.is-on { opacity: 1; }
+
+.home-glow-tint::before,
+.home-glow-tint::after {
+  content: "";
+  position: absolute;
+  width: 100vmax;
+  height: 100vmax;
+  will-change: transform;
+}
+
+/* orb A — the brighter pool, drifting across the upper half */
+.home-glow-tint::before {
+  top: -38vmax;
+  left: -30vmax;
+  /* long, eased falloff to alpha 0 — a linear ramp to `transparent`
+     leaves a Mach band where the gradient stops */
+  background-image:
+    radial-gradient(circle 46vmax at 40% 44%,
+      rgb(var(--glow-color) / 0.090) 0%,
+      rgb(var(--glow-color) / 0.064) 26%,
+      rgb(var(--glow-color) / 0.033) 50%,
+      rgb(var(--glow-color) / 0.011) 74%,
+      rgb(var(--glow-color) / 0) 100%),
+    radial-gradient(circle 42vmax at 68% 62%,
+      rgb(var(--glow-color) / 0.064) 0%,
+      rgb(var(--glow-color) / 0.045) 28%,
+      rgb(var(--glow-color) / 0.021) 52%,
+      rgb(var(--glow-color) / 0.006) 76%,
+      rgb(var(--glow-color) / 0) 100%);
+  animation: home-glow-drift-a 68s ease-in-out infinite alternate;
+}
+
+/* orb B — the softer pool, drifting across the lower half */
+.home-glow-tint::after {
+  bottom: -40vmax;
+  right: -32vmax;
+  background-image:
+    radial-gradient(circle 45vmax at 58% 46%,
+      rgb(var(--glow-color) / 0.075) 0%,
+      rgb(var(--glow-color) / 0.051) 27%,
+      rgb(var(--glow-color) / 0.024) 51%,
+      rgb(var(--glow-color) / 0.009) 75%,
+      rgb(var(--glow-color) / 0) 100%),
+    radial-gradient(circle 40vmax at 34% 66%,
+      rgb(var(--glow-color) / 0.055) 0%,
+      rgb(var(--glow-color) / 0.039) 28%,
+      rgb(var(--glow-color) / 0.018) 52%,
+      rgb(var(--glow-color) / 0.006) 76%,
+      rgb(var(--glow-color) / 0) 100%);
+  animation: home-glow-drift-b 92s ease-in-out infinite alternate;
+}
+
+/* different periods on the two orbs keep the colour mix from repeating */
+@keyframes home-glow-drift-a {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 0.85; }
+  50%  { transform: translate3d(9vw, 5vh, 0) rotate(28deg) scale(1.10); opacity: 1; }
+  100% { transform: translate3d(20vw, -4vh, 0) rotate(58deg) scale(1.02); opacity: 0.8; }
+}
+
+@keyframes home-glow-drift-b {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1.04); opacity: 0.8; }
+  50%  { transform: translate3d(-11vw, -7vh, 0) rotate(-24deg) scale(1); opacity: 1; }
+  100% { transform: translate3d(-18vw, 6vh, 0) rotate(-52deg) scale(1.12); opacity: 0.85; }
+}
+
+/* No drift. The colour cross-fade stays: it is a slow change of hue with
+   nothing moving, which is gentler than snapping between case colours. */
+@media (prefers-reduced-motion: reduce) {
+  .home-glow-tint::before,
+  .home-glow-tint::after {
+    animation: none;
+    will-change: auto;
+  }
+}
+
+/* ── Cards — pointer tilt and glass sheen, index.html only ──────────
+   Two families share the effect so the page speaks one language: the
+   skill cards in the scroller and the project previews in the list.
+   cards.js writes the two tilt angles onto the hovered card as custom
+   properties; everything visible is built here from those numbers.
+
+   The perspective sits on each card itself, never on an ancestor:
+   .skills-right is a horizontally scrolled track with a mask-image, and
+   giving it a 3D context flattens the mask and breaks the scroll.
+
+   Angles are deliberately small, and smaller again on the previews —
+   the same degrees across an 880px card read as a far bigger movement
+   than across a 288px one, so the previews also sit further from the
+   eye (1400px of perspective against 900px). cards.js holds the numbers.
+
+   The skills track has 16px of padding above the cards and none below,
+   so the lift there is paired with a 3px translateY: at full tilt the
+   near edge lands back on the track's bottom edge instead of a few
+   pixels under it, and the growth is spent upwards into padding that
+   already exists. Measured at maximum angle, the scroller's scrollHeight
+   stays equal to its clientHeight — nothing is clipped and the track
+   never becomes vertically scrollable. The previews stand in an
+   unclipped flex column, so they simply lift.
+
+   Only transform and opacity animate. */
+@media (hover: hover) and (pointer: fine) {
+  .skill,
+  .project-image {
+    --tilt-rx: 0deg;
+    --tilt-ry: 0deg;
+    --tilt-persp: 900px;
+    --tilt-z: 0px;
+    --tilt-lift: 0px;
+    --sheen-a: 0;
+    transform:
+      perspective(var(--tilt-persp))
+      translateY(var(--tilt-lift))
+      rotateX(var(--tilt-rx))
+      rotateY(var(--tilt-ry))
+      translateZ(var(--tilt-z));
+    /* the slow, eased leg: the return once the cursor is gone */
+    transition: transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* the previews are already positioned and already clip to their radius */
+  .skill { position: relative; }
+  .project-image { --tilt-persp: 1400px; }
+
+  /* while the cursor is inside, a short linear transition smooths the
+     per-frame steps without lagging behind the pointer */
+  .skill.is-tilting,
+  .project-image.is-tilting {
+    --tilt-z: 6px;
+    --sheen-a: 1;
+    transition: transform 110ms linear;
+    will-change: transform;
+  }
+
+  .skill.is-tilting { --tilt-lift: -3px; }
+  .project-image.is-tilting { --tilt-z: 4px; }
+
+  /* Sheen: a reflection lying ON the card, not a light held under the
+     cursor. A broad diagonal wash off the top-left corner plus one
+     narrower streak, both spent before mid-card, and faint enough to
+     pass for a sheet of glass catching the room. It is always present;
+     only its opacity moves, from 0.55 at rest to 1 while hovered, and
+     the card's own rotation swings the band with the surface — which is
+     what makes it read as a reflection rather than a spotlight. */
+  .skill::after,
+  .project-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    /* border-radius alone gives the overlay a circular corner while the
+       card underneath is a squircle — the two curves then cross */
+    corner-shape: inherit;
+    pointer-events: none;
+    opacity: var(--sheen-a);
+    transition: opacity 420ms ease;
+    background:
+      linear-gradient(158deg,
+        rgba(255, 255, 255, 0.055) 0%,
+        rgba(255, 255, 255, 0.022) 24%,
+        rgba(255, 255, 255, 0) 48%),
+      linear-gradient(118deg,
+        rgba(255, 255, 255, 0) 22%,
+        rgba(255, 255, 255, 0.022) 34%,
+        rgba(255, 255, 255, 0) 47%);
+  }
+
+  /* No tilt when motion is unwelcome. The sheen stays: it is a still
+     highlight whose only change is a slow opacity fade, so nothing
+     about it moves. */
+  @media (prefers-reduced-motion: reduce) {
+    .skill,
+    .skill.is-tilting,
+    .project-image,
+    .project-image.is-tilting {
+      --tilt-z: 0px;
+      --tilt-lift: 0px;
+      transform: none;
+      transition: none;
+      will-change: auto;
+    }
+  }
 }

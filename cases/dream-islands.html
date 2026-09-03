@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dream Islands — Oleg Salnikov</title>
+<!-- Favicon -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=20260903">
 </head>
 <body>
+
+<div class="case-glow case-glow--green" aria-hidden="true"></div>
 
 <div class="container">
   <header class="site-header">
@@ -20,10 +26,19 @@
   </header>
 </div>
 
-<main class="case-wrap case-main">
+<main class="case-wrap case-main has-toc">
+  <nav class="case-toc" aria-label="Contents">
+    <div class="case-toc-inner">
+      <ul class="case-toc-list">
+        <li><a href="#overview">overview</a></li>
+        <li><a href="#screens">screens</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <a class="back-pill" href="../index.html"><span class="material-symbols-outlined">arrow_back</span>Back</a>
 
-  <section class="case-intro">
+  <section class="case-intro" id="overview">
     <h1 class="case-title">dream islands</h1>
     <div class="case-desc">
       <p>An app for booking wellness trips and tracking your progress along the way. A dedicated Well Being Score lets you compare how you felt before, during, and after each activity. We took inspiration from Strava's mechanics, blending them with the relaxed feel of a wellness trip. Fast prototyping got us into the finals of Singapore's Iterative accelerator and earned positive feedback from the organizers.</p>
@@ -32,7 +47,7 @@
     <div class="case-hero"><img src="assets/Dream Islands/Frame 1321316689.png" alt="Dream Islands — wellness retreats"></div>
   </section>
 
-  <section class="case-tiles">
+  <section class="case-tiles" id="screens">
     <img src="assets/Dream Islands/inside/1.png" alt="Dream Islands — app screen">
     <img src="assets/Dream Islands/inside/2.png" alt="Dream Islands — app screen">
     <img src="assets/Dream Islands/inside/3.png" alt="Dream Islands — app screen">
@@ -68,6 +83,7 @@
 </footer>
 
 <script src="lightbox.js" defer></script>
+<script src="toc.js" defer></script>
 
 </body>
 </html>

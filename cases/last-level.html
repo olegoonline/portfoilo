@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modern Strike Online / Last Level Studio — Oleg Salnikov</title>
+<!-- Favicon -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=20260903">
 </head>
 <body>
+
+<div class="case-glow case-glow--red" aria-hidden="true"></div>
 
 <div class="container">
   <header class="site-header">
@@ -20,10 +26,23 @@
   </header>
 </div>
 
-<main class="case-wrap case-main">
+<main class="case-wrap case-main has-toc">
+  <nav class="case-toc" aria-label="Contents">
+    <div class="case-toc-inner">
+      <ul class="case-toc-list">
+        <li><a href="#overview">overview</a></li>
+        <li><a href="#duties">duties</a></li>
+        <li><a href="#challenges">challenges</a></li>
+        <li><a href="#my-team">my team</a></li>
+        <li><a href="#user-tests">user tests</a></li>
+        <li><a href="#studio-website">studio website</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <a class="back-pill" href="../index.html"><span class="material-symbols-outlined">arrow_back</span>Back</a>
 
-  <section class="case-intro">
+  <section class="case-intro" id="overview">
     <h1 class="case-title">modern strike online / last level studio</h1>
     <div class="case-desc">
       <p>Worked on this project as the team's design lead, responsible for the app's interface. We focused on the UX and built out the visual side of the UI. There was a lot on our plate, including a full app redesign and an overhaul of the design system.</p>
@@ -33,27 +52,27 @@
   </section>
 
   <section class="case-notes">
-    <div class="note">
+    <div class="note" id="duties">
       <span class="note-num">01</span>
       <h3 class="note-title">duties</h3>
       <p class="note-body">My responsibilities include creating UI, developing UX, team management, collecting feedback, overseeing design direction, and coordinating work with other specialists on the studio's collective projects, including interaction with design agencies and the studio's website redesign.</p>
     </div>
-    <div class="note">
+    <div class="note" id="challenges">
       <span class="note-num">02</span>
       <h3 class="note-title">challenges</h3>
       <p class="note-body">Led a hypothesis-driven redesign of the in-game store with product and analytics – qualitative interviews, funnel analysis, and player feedback delivered +50% conversion into the store, ~40% reduction in purchase-flow friction, and a +5–20% lift in promoted-item purchases.</p>
     </div>
-    <div class="note">
+    <div class="note" id="my-team">
       <span class="note-num">03</span>
       <h3 class="note-title">my team</h3>
       <p class="note-body">There are four people in our team: myself, another interface designer, a UI Artist, and a UI Animator who also handles technical animations. I created this department with the goal of covering all stages of interface development — from creating layouts to working on graphics and animations.</p>
     </div>
-    <div class="note">
+    <div class="note" id="user-tests">
       <span class="note-num">04</span>
       <h3 class="note-title">user tests</h3>
       <p class="note-body">We regularly assessed our work by gathering feedback from various sources: surveys for specific user groups, feature testing through A/B methods, and collecting feedback from beta testers.</p>
     </div>
-    <div class="note">
+    <div class="note" id="studio-website">
       <span class="note-num">05</span>
       <h3 class="note-title">studio website</h3>
       <p class="note-body">created brand new website for a studio featuring different UI styles for each studio game:
@@ -106,6 +125,7 @@
 </footer>
 
 <script src="lightbox.js" defer></script>
+<script src="toc.js" defer></script>
 
 </body>
 </html>

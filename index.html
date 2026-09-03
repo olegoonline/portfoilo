@@ -20,10 +20,16 @@
 <meta name="twitter:title" content="Oleg Salnikov — Product Designer">
 <meta name="twitter:description" content="Product designer and design lead based in Limassol. 7+ years refining the interplay between tools, interfaces & user experience.">
 <meta name="twitter:image" content="https://olegoonline.github.io/portfolio/cases/assets/thumbnail.jpg">
+<!-- Favicon -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0">
-<link rel="stylesheet" href="styles.css?v=20260620">
+<link rel="stylesheet" href="styles.css?v=20260903">
 </head>
 <body>
+
+<div class="home-glow" aria-hidden="true"></div>
 
 <div class="container">
   <header class="site-header">
@@ -109,6 +115,42 @@
     </article>
   </section>
 
+  <section id="expertise" class="container skills grid12">
+    <h2 class="display">expertise</h2>
+    <div class="skills-right">
+      <div class="skill skill--rose">
+        <img class="skill-icon" src="assets/icons/design-leadership.svg" alt="" width="48" height="48">
+        <h3 class="skill-title">design leadership</h3>
+        <p class="skill-desc">Built and led a team of 6 designers: sprint priorities, design reviews, onboarding, mentoring on systems thinking and engineering handoff.</p>
+      </div>
+      <div class="skill skill--violet">
+        <img class="skill-icon" src="assets/icons/ai-sparkles.svg" alt="" width="48" height="48">
+        <h3 class="skill-title">ai native apps</h3>
+        <p class="skill-desc">AI-powered internal products and workflow tooling. Built for non-technical users under pressure, including what they see when the model is wrong.</p>
+      </div>
+      <div class="skill skill--slate">
+        <img class="skill-icon" src="assets/icons/bolt.svg" alt="" width="48" height="48">
+        <h3 class="skill-title">ai workflows for design teams</h3>
+        <p class="skill-desc">Internal AI tools for rapid prototyping on Claude. Cut prototyping time on new flows by ~30% and made AI part of the team's daily workflow.</p>
+      </div>
+      <div class="skill skill--sage">
+        <img class="skill-icon" src="assets/icons/design-services.svg" alt="" width="48" height="48">
+        <h3 class="skill-title">ux &amp; interface design</h3>
+        <p class="skill-desc">Multi-role platforms and back-office tooling for 50–100 operators. Complex workflows and high content volumes at low error rates under daily use.</p>
+      </div>
+      <div class="skill skill--amber">
+        <img class="skill-icon" src="assets/icons/design-systems.svg" alt="" width="48" height="48">
+        <h3 class="skill-title">design systems</h3>
+        <p class="skill-desc">Atomic architecture, design tokens, file dependency model. Brand-kit delivery from 1 month to 1 week: 13 brands, 4 launches a month, near-zero handoff errors.</p>
+      </div>
+      <div class="skill skill--clay">
+        <img class="skill-icon" src="assets/icons/product-discovery.svg" alt="" width="48" height="48">
+        <h3 class="skill-title">product discovery</h3>
+        <p class="skill-desc">Usability testing, interview frameworks and funnel analysis with product and analytics. A hypothesis-driven store redesign lifted conversion by 50%.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="about" class="container about grid12">
     <h2 class="display">about me</h2>
     <div class="about-right">
@@ -147,6 +189,9 @@
     <span class="built">site built by: <a href="#">me</a></span>
   </div>
 </footer>
+
+<script src="glow.js" defer></script>
+<script src="cards.js" defer></script>
 
 </body>
 </html>

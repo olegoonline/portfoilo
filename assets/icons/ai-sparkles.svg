@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="sFill" x1="24" y1="4.9" x2="24" y2="43" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".52"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".27"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".12"/>
+    </linearGradient>
+    <linearGradient id="sRim" x1="24" y1="4.9" x2="24" y2="43" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".24"/>
+    </linearGradient>
+    <filter id="sGlow" filterUnits="userSpaceOnUse" x="-8" y="-8" width="64" height="64" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.1" flood-color="#000" flood-opacity=".45"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="1.9" flood-color="#fff" flood-opacity=".24"/>
+    </filter>
+  </defs>
+  <g filter="url(#sGlow)">
+    <path d="M17.42 11.97A0.48 0.48 0 0 1 18.38 11.97C17.9 17.15 24.45 23.7 29.63 23.22A0.48 0.48 0 0 1 29.63 24.18C24.45 23.7 17.9 30.25 18.38 35.43A0.48 0.48 0 0 1 17.42 35.43C17.9 30.25 11.35 23.7 6.17 24.18A0.48 0.48 0 0 1 6.17 23.22C11.35 23.7 17.9 17.15 17.42 11.97Z" fill="url(#sFill)"/>
+    <path d="M35.55 5.34A0.25 0.25 0 0 1 36.05 5.34C35.8 8.06 39.24 11.5 41.96 11.25A0.25 0.25 0 0 1 41.96 11.75C39.24 11.5 35.8 14.94 36.05 17.66A0.25 0.25 0 0 1 35.55 17.66C35.8 14.94 32.36 11.5 29.64 11.75A0.25 0.25 0 0 1 29.64 11.25C32.36 11.5 35.8 8.06 35.55 5.34Z" fill="url(#sFill)"/>
+    <path d="M35.04 29.79A0.26 0.26 0 0 1 35.56 29.79C35.3 32.62 38.88 36.2 41.71 35.94A0.26 0.26 0 0 1 41.71 36.46C38.88 36.2 35.3 39.78 35.56 42.61A0.26 0.26 0 0 1 35.04 42.61C35.3 39.78 31.72 36.2 28.89 36.46A0.26 0.26 0 0 1 28.89 35.94C31.72 36.2 35.3 32.62 35.04 29.79Z" fill="url(#sFill)"/>
+    <path d="M17.42 11.97A0.48 0.48 0 0 1 18.38 11.97C17.9 17.15 24.45 23.7 29.63 23.22A0.48 0.48 0 0 1 29.63 24.18C24.45 23.7 17.9 30.25 18.38 35.43A0.48 0.48 0 0 1 17.42 35.43C17.9 30.25 11.35 23.7 6.17 24.18A0.48 0.48 0 0 1 6.17 23.22C11.35 23.7 17.9 17.15 17.42 11.97Z" fill="none" stroke="url(#sRim)" stroke-width="1.05" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M35.55 5.34A0.25 0.25 0 0 1 36.05 5.34C35.8 8.06 39.24 11.5 41.96 11.25A0.25 0.25 0 0 1 41.96 11.75C39.24 11.5 35.8 14.94 36.05 17.66A0.25 0.25 0 0 1 35.55 17.66C35.8 14.94 32.36 11.5 29.64 11.75A0.25 0.25 0 0 1 29.64 11.25C32.36 11.5 35.8 8.06 35.55 5.34Z" fill="none" stroke="url(#sRim)" stroke-width="1.05" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M35.04 29.79A0.26 0.26 0 0 1 35.56 29.79C35.3 32.62 38.88 36.2 41.71 35.94A0.26 0.26 0 0 1 41.71 36.46C38.88 36.2 35.3 39.78 35.56 42.61A0.26 0.26 0 0 1 35.04 42.61C35.3 39.78 31.72 36.2 28.89 36.46A0.26 0.26 0 0 1 28.89 35.94C31.72 36.2 35.3 32.62 35.04 29.79Z" fill="none" stroke="url(#sRim)" stroke-width="1.05" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+</svg>

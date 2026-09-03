@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="eFill" x1="24" y1="6.5" x2="24" y2="41.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".52"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".27"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".12"/>
+    </linearGradient>
+    <linearGradient id="eRim" x1="24" y1="6.5" x2="24" y2="41.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".24"/>
+    </linearGradient>
+    <filter id="eGlow" filterUnits="userSpaceOnUse" x="-8" y="-8" width="64" height="64" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.1" flood-color="#000" flood-opacity=".45"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="1.9" flood-color="#fff" flood-opacity=".24"/>
+    </filter>
+    <linearGradient id="eGlobG" x1="24" y1="6.5" x2="24" y2="41.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".82"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".26"/>
+    </linearGradient>
+    <mask id="eGlob" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+      <rect width="48" height="48" fill="url(#eGlobG)"/>
+      <circle cx="31.2" cy="28.45" r="9.3" fill="#000"/>
+    </mask>
+    <linearGradient id="eHaloG" x1="24" y1="6.5" x2="24" y2="41.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".12"/>
+    </linearGradient>
+    <mask id="eHalo" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+      <rect width="48" height="48" fill="url(#eHaloG)"/>
+      <circle cx="31.2" cy="28.45" r="9.3" fill="#000"/>
+    </mask>
+    <linearGradient id="eLoupG" x1="24" y1="6.5" x2="24" y2="41.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".82"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".26"/>
+    </linearGradient>
+    <mask id="eLoup" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+      <rect width="48" height="48" fill="url(#eLoupG)"/>
+    </mask>
+    <linearGradient id="eLoupHG" x1="24" y1="6.5" x2="24" y2="41.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".12"/>
+    </linearGradient>
+    <mask id="eLoupH" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+      <rect width="48" height="48" fill="url(#eLoupHG)"/>
+    </mask>
+  </defs>
+  <g filter="url(#eGlow)">
+    <g mask="url(#eHalo)" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+      <circle cx="21.8" cy="23.55" r="16.2"/>
+      <ellipse cx="21.8" cy="23.55" rx="8.1" ry="16.2"/>
+      <path d="M21.8 7.35L21.8 39.75"/>
+      <path d="M5.6 23.55L38 23.55"/>
+      <path d="M8.87 15.29L34.73 15.29"/>
+      <path d="M8.87 31.81L34.73 31.81"/>
+    </g>
+    <g mask="url(#eGlob)" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+      <circle cx="21.8" cy="23.55" r="16.2"/>
+      <ellipse cx="21.8" cy="23.55" rx="8.1" ry="16.2"/>
+      <path d="M21.8 7.35L21.8 39.75"/>
+      <path d="M5.6 23.55L38 23.55"/>
+      <path d="M8.87 15.29L34.73 15.29"/>
+      <path d="M8.87 31.81L34.73 31.81"/>
+    </g>
+    <g mask="url(#eLoupH)">
+      <path fill-rule="evenodd" fill="#fff" d="M22.4 28.45A8.8 8.8 0 0 1 31.2 19.65A8.8 8.8 0 0 1 40 28.45A8.8 8.8 0 0 1 31.2 37.25A8.8 8.8 0 0 1 22.4 28.45ZM25.4 28.45A5.8 5.8 0 0 1 31.2 22.65A5.8 5.8 0 0 1 37 28.45A5.8 5.8 0 0 1 31.2 34.25A5.8 5.8 0 0 1 25.4 28.45Z"/>
+      <path d="M37.07 34.32L41.3 39.55" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+    </g>
+    <g mask="url(#eLoup)">
+      <circle cx="31.2" cy="28.45" r="6.6" fill="#fff" opacity=".45"/>
+      <path fill-rule="evenodd" fill="#fff" d="M22.9 28.45A8.3 8.3 0 0 1 31.2 20.15A8.3 8.3 0 0 1 39.5 28.45A8.3 8.3 0 0 1 31.2 36.75A8.3 8.3 0 0 1 22.9 28.45ZM24.9 28.45A6.3 6.3 0 0 1 31.2 22.15A6.3 6.3 0 0 1 37.5 28.45A6.3 6.3 0 0 1 31.2 34.75A6.3 6.3 0 0 1 24.9 28.45Z"/>
+      <path d="M37.07 34.32L41.3 39.55" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

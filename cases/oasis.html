@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oasis Studio — Oleg Salnikov</title>
+<!-- Favicon -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=20260903">
 </head>
 <body>
+
+<div class="case-glow case-glow--teal" aria-hidden="true"></div>
 
 <div class="container">
   <header class="site-header">
@@ -20,10 +26,21 @@
   </header>
 </div>
 
-<main class="case-wrap case-main">
+<main class="case-wrap case-main has-toc">
+  <nav class="case-toc" aria-label="Contents">
+    <div class="case-toc-inner">
+      <ul class="case-toc-list">
+        <li><a href="#overview">overview</a></li>
+        <li><a href="#visual-identity">visual identity</a></li>
+        <li><a href="#mobile">mobile compatibility</a></li>
+        <li><a href="#architecture">site architecture</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <a class="back-pill" href="../index.html"><span class="material-symbols-outlined">arrow_back</span>Back</a>
 
-  <section class="case-intro">
+  <section class="case-intro" id="overview">
     <h1 class="case-title">oasis studio</h1>
     <div class="case-desc">
       <p>designed site portfolio for an art studio “oasis”</p>
@@ -32,7 +49,7 @@
     <div class="case-hero"><img src="assets/oasis/Frame 1321316691-1.png" alt="Oasis Studio — site portfolio"></div>
   </section>
 
-  <section class="case-figure">
+  <section class="case-figure" id="visual-identity">
     <div class="note">
       <span class="note-num">01</span>
       <h3 class="note-title">visual identity</h3>
@@ -41,7 +58,7 @@
     <img src="assets/oasis/inside/01.png" alt="Oasis — visual identity">
   </section>
 
-  <section class="case-figure">
+  <section class="case-figure" id="mobile">
     <div class="note">
       <span class="note-num">02</span>
       <h3 class="note-title">full compatibility with mobile devices</h3>
@@ -50,7 +67,7 @@
     <img src="assets/oasis/inside/02.png" alt="Oasis — responsive layouts">
   </section>
 
-  <section class="case-figure">
+  <section class="case-figure" id="architecture">
     <div class="note">
       <span class="note-num">03</span>
       <h3 class="note-title">site architecture</h3>
@@ -87,6 +104,7 @@
 </footer>
 
 <script src="lightbox.js" defer></script>
+<script src="toc.js" defer></script>
 
 </body>
 </html>

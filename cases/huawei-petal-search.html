@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Petal Search Lab / Huawei — Oleg Salnikov</title>
+<!-- Favicon -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=20260903">
 </head>
 <body>
+
+<div class="case-glow case-glow--cyan" aria-hidden="true"></div>
 
 <div class="container">
   <header class="site-header">
@@ -20,10 +26,23 @@
   </header>
 </div>
 
-<main class="case-wrap case-main">
+<main class="case-wrap case-main has-toc">
+  <nav class="case-toc" aria-label="Contents">
+    <div class="case-toc-inner">
+      <ul class="case-toc-list">
+        <li><a href="#overview">overview</a></li>
+        <li><a href="#the-product">the product</a></li>
+        <li><a href="#my-team">my team</a></li>
+        <li><a href="#partners">partners</a></li>
+        <li><a href="#process">process</a></li>
+        <li><a href="#design-nda">design &amp; nda</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <a class="back-pill" href="../index.html"><span class="material-symbols-outlined">arrow_back</span>Back</a>
 
-  <section class="case-intro">
+  <section class="case-intro" id="overview">
     <h1 class="case-title">petal search lab / huawei</h1>
     <div class="case-desc">
       <p>I worked as a Senior UI/UX Designer on the Russian version of the Huawei Petal Search engine. Our team focused on developing the mobile application and its market promotion.</p>
@@ -33,26 +52,26 @@
   </section>
 
   <section class="case-notes">
-    <div class="note">
+    <div class="note" id="the-product">
       <span class="note-num">01</span>
       <h3 class="note-title">the product</h3>
       <p class="note-body">We were responsible for adapting Petal Search for the Russian market. We had relative freedom and significant influence on decision-making regarding the development direction. Structurally, we were separated from R&amp;D and operated as a development laboratory, even referred to as the Petal Search Lab.</p>
     </div>
-    <div class="note">
+    <div class="note" id="my-team">
       <span class="note-num">02</span>
       <h3 class="note-title">my team</h3>
       <p class="note-body">The team consisted of various specialists, including individuals from China who worked in the Russian office; some of them were part of our team.
 
 The main office immediately noticed that our work was of high quality, and the features quickly passed reviews.</p>
     </div>
-    <div class="note">
+    <div class="note" id="partners">
       <span class="note-num">03</span>
       <h3 class="note-title">partners</h3>
       <p class="note-body">We collaborated with various trading platforms, providing their listings for sale through the Petal Search marketplace.
 
 I was responsible for updating the store's UX and UI, implementing modern practices, and analysing competitor decisions.</p>
     </div>
-    <div class="note">
+    <div class="note" id="process">
       <span class="note-num">04</span>
       <h3 class="note-title">process</h3>
       <p class="note-body">The marketplace was quite an interesting part of the job because it was very dynamic. We could quickly test various hypotheses, make quick adjustments, create campaigns, and so on.</p>
@@ -60,7 +79,7 @@ I was responsible for updating the store's UX and UI, implementing modern practi
   </section>
 
   <section class="case-gallery">
-    <div class="note">
+    <div class="note" id="design-nda">
       <span class="note-num">05</span>
       <h3 class="note-title">design &amp; nda</h3>
       <p class="note-body">I can only show what's currently available in the public domain. As far as I understood, the project was discontinued after the reduction in R&amp;D activities in 2022. There's an international version of Nearby, but it's not the same at all. We had a very cool adaptation specifically for Russia – with local theaters, movies, points of interest. One of the coolest among all the offices.</p>
@@ -98,6 +117,7 @@ I was responsible for updating the store's UX and UI, implementing modern practi
 </footer>
 
 <script src="lightbox.js" defer></script>
+<script src="toc.js" defer></script>
 
 </body>
 </html>

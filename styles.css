@@ -927,25 +927,17 @@ h1.display, .display {
 .skills-right.is-scrolled { --fade-l: var(--fade); }
 .skills-right.is-at-end { --fade-r: 0px; }
 
+/* One surface for the whole set — no per-card tint, no hover response */
 .skill {
-  --tint: 255, 255, 255;
   flex: 0 0 288px;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 24px;
-  background: rgba(var(--tint), 0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl);
 }
-
-/* muted card tints — one per skill */
-.skill--sage   { --tint: 134, 170, 148; }
-.skill--violet { --tint: 148, 134, 196; }
-.skill--slate  { --tint: 116, 150, 186; }
-.skill--amber  { --tint: 198, 164, 104; }
-.skill--clay   { --tint: 198, 132, 110; }
-.skill--rose   { --tint: 190, 132, 148; }
 
 .skill-icon {
   display: block;
@@ -1198,110 +1190,24 @@ h1.display, .display {
   }
 }
 
-/* ── Cards — pointer tilt and glass sheen, index.html only ──────────
-   Two families share the effect so the page speaks one language: the
-   skill cards in the scroller and the project previews in the list.
-   cards.js writes the two tilt angles onto the hovered card as custom
-   properties; everything visible is built here from those numbers.
-
-   The perspective sits on each card itself, never on an ancestor:
-   .skills-right is a horizontally scrolled track with a mask-image, and
-   giving it a 3D context flattens the mask and breaks the scroll.
-
-   Angles are deliberately small, and smaller again on the previews —
-   the same degrees across an 880px card read as a far bigger movement
-   than across a 288px one, so the previews also sit further from the
-   eye (1400px of perspective against 900px). cards.js holds the numbers.
-
-   The skills track has 16px of padding above the cards and none below,
-   so the lift there is paired with a 3px translateY: at full tilt the
-   near edge lands back on the track's bottom edge instead of a few
-   pixels under it, and the growth is spent upwards into padding that
-   already exists. Measured at maximum angle, the scroller's scrollHeight
-   stays equal to its clientHeight — nothing is clipped and the track
-   never becomes vertically scrollable. The previews stand in an
-   unclipped flex column, so they simply lift.
-
-   Only transform and opacity animate. */
+/* ── Case previews — image zoom on hover, index.html only ──────────
+   The card itself never moves: only the photograph inside it grows a
+   little, held by the card's own overflow: hidden. No tilt, no sheen —
+   the frame stays put and the picture leans in. Fine pointers only, and
+   nothing at all when motion is unwelcome. */
 @media (hover: hover) and (pointer: fine) {
-  .skill,
-  .project-image {
-    --tilt-rx: 0deg;
-    --tilt-ry: 0deg;
-    --tilt-persp: 900px;
-    --tilt-z: 0px;
-    --tilt-lift: 0px;
-    --sheen-a: 0;
-    transform:
-      perspective(var(--tilt-persp))
-      translateY(var(--tilt-lift))
-      rotateX(var(--tilt-rx))
-      rotateY(var(--tilt-ry))
-      translateZ(var(--tilt-z));
-    /* the slow, eased leg: the return once the cursor is gone */
+  .project-image img {
+    transform: scale(1);
     transition: transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
-  /* the previews are already positioned and already clip to their radius */
-  .skill { position: relative; }
-  .project-image { --tilt-persp: 1400px; }
+  .project-image:hover img { transform: scale(1.04); }
 
-  /* while the cursor is inside, a short linear transition smooths the
-     per-frame steps without lagging behind the pointer */
-  .skill.is-tilting,
-  .project-image.is-tilting {
-    --tilt-z: 6px;
-    --sheen-a: 1;
-    transition: transform 110ms linear;
-    will-change: transform;
-  }
-
-  .skill.is-tilting { --tilt-lift: -3px; }
-  .project-image.is-tilting { --tilt-z: 4px; }
-
-  /* Sheen: a reflection lying ON the card, not a light held under the
-     cursor. A broad diagonal wash off the top-left corner plus one
-     narrower streak, both spent before mid-card, and faint enough to
-     pass for a sheet of glass catching the room. It is always present;
-     only its opacity moves, from 0.55 at rest to 1 while hovered, and
-     the card's own rotation swings the band with the surface — which is
-     what makes it read as a reflection rather than a spotlight. */
-  .skill::after,
-  .project-image::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    /* border-radius alone gives the overlay a circular corner while the
-       card underneath is a squircle — the two curves then cross */
-    corner-shape: inherit;
-    pointer-events: none;
-    opacity: var(--sheen-a);
-    transition: opacity 420ms ease;
-    background:
-      linear-gradient(158deg,
-        rgba(255, 255, 255, 0.055) 0%,
-        rgba(255, 255, 255, 0.022) 24%,
-        rgba(255, 255, 255, 0) 48%),
-      linear-gradient(118deg,
-        rgba(255, 255, 255, 0) 22%,
-        rgba(255, 255, 255, 0.022) 34%,
-        rgba(255, 255, 255, 0) 47%);
-  }
-
-  /* No tilt when motion is unwelcome. The sheen stays: it is a still
-     highlight whose only change is a slow opacity fade, so nothing
-     about it moves. */
   @media (prefers-reduced-motion: reduce) {
-    .skill,
-    .skill.is-tilting,
-    .project-image,
-    .project-image.is-tilting {
-      --tilt-z: 0px;
-      --tilt-lift: 0px;
+    .project-image img,
+    .project-image:hover img {
       transform: none;
       transition: none;
-      will-change: auto;
     }
   }
 }
